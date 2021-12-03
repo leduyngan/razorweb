@@ -101,14 +101,17 @@
         if (pageitem != currentPage)
         {
             <li class="page-item">
-                <a class="page-link" href="@generateUrl(pageitem)">
+                @* <a class="page-link" href="@generateUrl(pageitem)">
+                    @pageitem
+                    </a> *@
+                <a class="page-link" href="/Blog/Index?p=@pageitem.ToString()">
                     @pageitem
                 </a>
             </li>
         }
         else
         {
-            <li class="page-item active" aria-current="page">
+            <li class=" page-item active" aria-current="page">
                 <a class="page-link" href="#">@pageitem <span class="sr-only">(current)</span></a>
             </li>
         }
