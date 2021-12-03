@@ -61,3 +61,7 @@ namespace asp13EntityFramework
         }
     }
 }
+
+/*
+dotnet aspnet-codegenerator razorpage -m asp13EntityFramework.models.Article -dc asp13EntityFramework.models.MyBlogContext -outDir Pages/Blog -udl -scripts 
+*/
