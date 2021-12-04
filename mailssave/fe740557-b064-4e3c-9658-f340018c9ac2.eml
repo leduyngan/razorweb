@@ -1,0 +1,10 @@
+From: NganMailTest Le Duy <nganmailtest186@gmail.com>
+Date: Sat, 04 Dec 2021 17:30:42 +0700
+Subject: Confirm your email
+Message-Id: <APJQCWQSGFU4.NPLGIJ6U2SPT1@NganLD>
+Sender: NganMailTest Le Duy <nganmailtest186@gmail.com>
+To: nganmailtest186@gmail.com
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+Please confirm your account by <a href='https://localhost:5001/Identity/Account/ConfirmEmail?userId=dd0625d1-6abb-4b6b-9383-82325356f06e&amp;code=Q2ZESjhDandzWGVhT2NaS3IxMEQrbUJUK2lLbjk4VE9teGJmSkJQbWlhOHJiMkduT1h1a1B0eDNlb251NHVSNWVwMmVudnZHMFh0R1NabWFaalUwTU9ySXgreUNtSllQVTh5b1EvQUxEb2VLdktsRldxeTZ2QjlMTmZwWHFndFM2eittSVlDalpKOS9qek45Z0F0UldCS1lmUC9sYWZTeHRvSE1iakZnNjRMbDJzK3lDN0hxdDd0MTZXMlk0VlNjMmxFeUpwbWFkd1pYVThvSHN1ckNyTVRoQ2laajBka0JJZUZaTU5kSlFJUkN2ek1DLzUwRHZYK3ZWQVFkWmtHaWdqdm4zZz09&amp;returnUrl=%2F'>clicking here</a>.
