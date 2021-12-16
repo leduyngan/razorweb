@@ -73,6 +73,10 @@ namespace asp13EntityFramework.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            // foreach (var provider in ExternalLogins)
+            // {
+            //     _logger.LogInformation(provider.Name);
+            // }
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)

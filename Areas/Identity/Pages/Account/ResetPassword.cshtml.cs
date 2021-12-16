@@ -57,6 +57,7 @@ namespace asp13EntityFramework.Areas.Identity.Pages.Account
                 Input = new InputModel
                 {
                     Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
+                    //Code = code
                 };
                 return Page();
             }
