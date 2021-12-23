@@ -101,12 +101,12 @@
         if (pageitem != currentPage)
         {
             <li class="page-item">
-                @* <a class="page-link" href="@generateUrl(pageitem)">
-                    @pageitem
-                    </a> *@
-                <a class="page-link" href="/Blog/Index?p=@pageitem.ToString()">
+                <a class="page-link" href="@generateUrl(pageitem)">
                     @pageitem
                 </a>
+                @* <a class="page-link" href="/Blog/Index?p=@pageitem.ToString()">
+                    @pageitem
+                    </a> *@
             </li>
         }
         else

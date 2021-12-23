@@ -7,6 +7,7 @@ namespace asp13EntityFramework.models
     {
         public MyBlogContext(DbContextOptions<MyBlogContext> options) : base(options)
         {
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {

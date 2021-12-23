@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.service;
 using asp13EntityFramework.models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -43,8 +44,7 @@ namespace asp13EntityFramework
             services.AddIdentity<AppUser, IdentityRole>()
             .AddEntityFrameworkStores<MyBlogContext>()
             .AddDefaultTokenProviders();
-
-            // services.AddDefaultIdentity<AppUser>()
+            //services.AddDefaultIdentity<AppUser>()
             // .AddEntityFrameworkStores<MyBlogContext>()
             // .AddDefaultTokenProviders();
 
@@ -98,6 +98,8 @@ namespace asp13EntityFramework
                         //https://localhost:5001/signin-google
                         options.CallbackPath = "/dang-nhap-tu-facebook";
                     });
+            services.AddSingleton<IdentityErrorDescriber, AppIdentityErrorDescriber>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -130,9 +132,13 @@ namespace asp13EntityFramework
     }
 }
 
+
 /*
 dotnet aspnet-codegenerator razorpage -m asp13EntityFramework.models.Article -dc asp13EntityFramework.models.MyBlogContext -outDir Pages/Blog -udl -scripts 
 */
 
 // 
 // dotnet aspnet-codegenerator identity -dc asp13EntityFramework.models.MyBlogContext
+/*
+dotnet new page -n Index -o Areas/Admin/Pages/Role -na App.Admin.Role
+*/
