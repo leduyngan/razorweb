@@ -9,10 +9,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.Admin.Role
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = "AllowEditRole")]
     public class EditModel : RolePageModel
     {
         public EditModel(RoleManager<IdentityRole> roleManager, MyBlogContext conext) : base(roleManager, conext)
@@ -28,6 +29,7 @@ namespace App.Admin.Role
         }
         [BindProperty]
         public InputModel Input { get; set; }
+        public List<IdentityRoleClaim<string>> Claims { get; set; }
         public IdentityRole role { set; get; }
         public async Task<IActionResult> OnGet(string roleid)
         {
@@ -39,6 +41,7 @@ namespace App.Admin.Role
                 {
                     Name = role.Name
                 };
+                Claims = await _conext.RoleClaims.Where(rc => rc.RoleId == role.Id).ToListAsync();
                 return Page();
             }
             return NotFound("Không tìm thấy role");
@@ -52,7 +55,7 @@ namespace App.Admin.Role
             {
                 return NotFound("Không tìm thấy role");
             }
-
+            Claims = await _conext.RoleClaims.Where(rc => rc.RoleId == role.Id).ToListAsync();
             if (!ModelState.IsValid)
             {
                 return Page();

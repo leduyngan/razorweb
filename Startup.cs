@@ -99,6 +99,17 @@ namespace asp13EntityFramework
                         options.CallbackPath = "/dang-nhap-tu-facebook";
                     });
             services.AddSingleton<IdentityErrorDescriber, AppIdentityErrorDescriber>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AllowEditRole", policyBuilder =>
+                {
+                    policyBuilder.RequireAuthenticatedUser();
+                    // policyBuilder.RequireRole("Admin");
+                    // policyBuilder.RequireRole("Editor");
+                    // policyBuilder.RequireClaim("manage.role", "add", "update");
+                    policyBuilder.RequireClaim("canedit", "user");
+                });
+            });
 
         }
 

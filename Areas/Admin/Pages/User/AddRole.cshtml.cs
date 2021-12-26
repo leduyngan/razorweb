@@ -18,15 +18,18 @@ namespace App.Admin.User
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly MyBlogContext _context;
 
         public AddRoledModel(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            MyBlogContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _context = context;
         }
         [TempData]
         public string StatusMessage { get; set; }
@@ -36,6 +39,8 @@ namespace App.Admin.User
         [DisplayName("Các role gán cho user")]
         public string[] RoleNames { set; get; }
         public SelectList allRoles { get; set; }
+        public List<IdentityRoleClaim<string>> claimsInRole { set; get; }
+        public List<IdentityUserClaim<string>> claimsInUserClaim { get; set; }
         public async Task<IActionResult> OnGetAsync(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -51,7 +56,7 @@ namespace App.Admin.User
 
             List<string> roleNames = await _roleManager.Roles.Select(r => r.Name).ToListAsync();
             allRoles = new SelectList(roleNames);
-
+            await GetClaims(id);
             return Page();
         }
 
@@ -68,7 +73,7 @@ namespace App.Admin.User
             {
                 return NotFound($"Không tìm thất user, id = {id}");
             }
-
+            await GetClaims(id);
             var OldRoleNames = (await _userManager.GetRolesAsync(user)).ToArray();
             var deleteRoles = OldRoleNames.Where(r => !RoleNames.Contains(r));
             var addRoles = RoleNames.Where(r => !OldRoleNames.Contains(r));
@@ -99,6 +104,23 @@ namespace App.Admin.User
             StatusMessage = $"Vừa cập nhật role cho user: {user.UserName}";
 
             return RedirectToPage("./Index");
+        }
+
+        async Task GetClaims(string id)
+        {
+            var listRoles = from r in _context.Roles
+                            join ur in _context.UserRoles on r.Id equals ur.RoleId
+                            where ur.UserId == id
+                            select r;
+            var _claimInRole = from c in listRoles
+                               join rc in _context.RoleClaims on c.Id equals rc.RoleId
+                               select rc;
+            claimsInRole = await _claimInRole.ToListAsync();
+
+
+            claimsInUserClaim = await (from c in _context.UserClaims
+                                       where c.UserId == id
+                                       select c).ToListAsync();
         }
     }
 }
