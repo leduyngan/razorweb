@@ -1,9 +1,9 @@
 ﻿using System;
-using asp13EntityFramework.models;
+using App.Models;
 using Bogus;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace asp13EntityFramework.Migrations
+namespace App.Migrations
 {
     public partial class initdb : Migration
     {

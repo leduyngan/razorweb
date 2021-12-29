@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using asp13EntityFramework.models;
+using App.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +15,7 @@ namespace App.Admin.Role
 
     public class IndexModel : RolePageModel
     {
-        public IndexModel(RoleManager<IdentityRole> roleManager, MyBlogContext conext) : base(roleManager, conext)
+        public IndexModel(RoleManager<IdentityRole> roleManager, AppDbContext conext) : base(roleManager, conext)
         {
         }
         public class RoleModel : IdentityRole

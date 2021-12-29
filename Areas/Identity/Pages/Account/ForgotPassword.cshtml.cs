@@ -5,14 +5,14 @@ using System.Text.Encodings.Web;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using asp13EntityFramework.models;
+using App.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace asp13EntityFramework.Areas.Identity.Pages.Account
+namespace App.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ForgotPasswordModel : PageModel

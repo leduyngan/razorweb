@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace asp13EntityFramework.Migrations
+namespace App.Migrations
 {
     public partial class SeedUser : Migration
     {

@@ -6,17 +6,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using asp13EntityFramework.models;
+using App.Models;
+using Microsoft.AspNetCore.Authorization;
 
-namespace asp13EntityFramework.Pages_Blog
+namespace App.Pages_Blog
 {
     public class EditModel : PageModel
     {
-        private readonly asp13EntityFramework.models.MyBlogContext _context;
+        private readonly App.Models.AppDbContext _context;
+        private readonly IAuthorizationService _authorizationService;
 
-        public EditModel(asp13EntityFramework.models.MyBlogContext context)
+        public EditModel(App.Models.AppDbContext context, IAuthorizationService authorizationService)
         {
             _context = context;
+            _authorizationService = authorizationService;
         }
 
         [BindProperty]
@@ -51,7 +54,15 @@ namespace asp13EntityFramework.Pages_Blog
 
             try
             {
-                await _context.SaveChangesAsync();
+                var canUpdate = await _authorizationService.AuthorizeAsync(this.User, Article, "CanUpdateArticle");
+                if (canUpdate.Succeeded)
+                {
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    return Content("Không được quyền cập nhật");
+                }
             }
             catch (DbUpdateConcurrencyException)
             {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Linq;
 using System.Threading.Tasks;
-using asp13EntityFramework.models;
+using App.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.AspNetCore.Authorization;
 
-namespace asp13EntityFramework.Areas.Identity.Pages.Account.Manage
+namespace App.Areas.Identity.Pages.Account.Manage
 {
     [Authorize]
     public partial class EmailModel : PageModel

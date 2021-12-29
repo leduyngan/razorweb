@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using asp13EntityFramework.models;
+using App.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,9 +14,9 @@ namespace App.Admin.User
 {
     public class EditUserRoleClaimModel : PageModel
     {
-        private readonly MyBlogContext _context;
+        private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _userManager;
-        public EditUserRoleClaimModel(MyBlogContext context, UserManager<AppUser> userManager)
+        public EditUserRoleClaimModel(AppDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
             _userManager = userManager;

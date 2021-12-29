@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using asp13EntityFramework.models;
+using App.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +16,7 @@ namespace App.Admin.Role
     [Authorize(Roles = "Admin")]
     public class AddRoleClaimModel : RolePageModel
     {
-        public AddRoleClaimModel(RoleManager<IdentityRole> roleManager, MyBlogContext conext) : base(roleManager, conext)
+        public AddRoleClaimModel(RoleManager<IdentityRole> roleManager, AppDbContext conext) : base(roleManager, conext)
         {
         }
 

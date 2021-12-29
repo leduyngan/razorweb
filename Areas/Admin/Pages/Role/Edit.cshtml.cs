@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using asp13EntityFramework.models;
+using App.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +16,7 @@ namespace App.Admin.Role
     [Authorize(Policy = "AllowEditRole")]
     public class EditModel : RolePageModel
     {
-        public EditModel(RoleManager<IdentityRole> roleManager, MyBlogContext conext) : base(roleManager, conext)
+        public EditModel(RoleManager<IdentityRole> roleManager, AppDbContext conext) : base(roleManager, conext)
         {
         }
 

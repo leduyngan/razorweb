@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.Security.Requirements;
 using App.service;
-using asp13EntityFramework.models;
+using App.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,7 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace asp13EntityFramework
+namespace App
 {
     public class Startup
     {
@@ -34,7 +36,7 @@ namespace asp13EntityFramework
             services.AddSingleton<IEmailSender, SendMailService>();
 
             services.AddRazorPages();
-            services.AddDbContext<MyBlogContext>(options =>
+            services.AddDbContext<AppDbContext>(options =>
             {
                 string connectionString = Configuration.GetConnectionString("MyBlogContext");
                 options.UseSqlServer(connectionString);
@@ -42,7 +44,7 @@ namespace asp13EntityFramework
 
             // Đăng ký Identity 
             services.AddIdentity<AppUser, IdentityRole>()
-            .AddEntityFrameworkStores<MyBlogContext>()
+            .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
             //services.AddDefaultIdentity<AppUser>()
             // .AddEntityFrameworkStores<MyBlogContext>()
@@ -109,7 +111,21 @@ namespace asp13EntityFramework
                     // policyBuilder.RequireClaim("manage.role", "add", "update");
                     policyBuilder.RequireClaim("canedit", "user");
                 });
+                options.AddPolicy("InGenZ", policyBuilder =>
+                {
+                    policyBuilder.RequireAuthenticatedUser();
+                    policyBuilder.Requirements.Add(new GenZRequirment());
+                });
+                options.AddPolicy("ShowAdminMenu", pb =>
+                {
+                    pb.RequireRole("Admin");
+                });
+                options.AddPolicy("CanUpdateArticle", pb =>
+                {
+                    pb.Requirements.Add(new ArticleUpdateRequirement());
+                });
             });
+            services.AddTransient<IAuthorizationHandler, AppAuthorizationHandler>();
 
         }
 
